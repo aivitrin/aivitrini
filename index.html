@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIVitrin — Türkiye'nin AI Araçları Rehberi</title>
+<meta name="description" content="En güncel yapay zeka araçlarını Türkçe inceleyin. Kategoriler, karşılaştırmalar ve kullanım rehberleri.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #07070a;
+  --s1: #0e0e14;
+  --s2: #14141c;
+  --border: #1e1e2e;
+  --border2: #2a2a3e;
+  --yellow: #ffb400;
+  --red: #ff3e6c;
+  --cyan: #00d4ff;
+  --green: #00e676;
+  --text: #f0f0f8;
+  --mid: #9898b8;
+  --muted: #4a4a6a;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* Subtle grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,180,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,180,0,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(7,7,10,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--yellow); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.nav-links a:hover { color: var(--text); background: var(--s2); }
+.nav-links a.active { color: var(--yellow); }
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 14px;
+  transition: border-color 0.2s;
+}
+
+.nav-search:focus-within { border-color: var(--yellow); }
+
+.nav-search input {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  width: 180px;
+}
+
+.nav-search input::placeholder { color: var(--muted); }
+
+.search-icon { color: var(--muted); font-size: 14px; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 28px 80px;
+  position: relative;
+  overflow: hidden;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(255,180,0,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-glow2 {
+  position: absolute;
+  bottom: 10%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,180,0,0.08);
+  border: 1px solid rgba(255,180,0,0.2);
+  border-radius: 3px;
+  padding: 5px 14px;
+  margin-bottom: 28px;
+  width: fit-content;
+}
+
+.hero-tag-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--yellow);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+.hero-tag-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 9vw, 100px);
+  line-height: 0.92;
+  letter-spacing: 0.03em;
+  margin-bottom: 24px;
+}
+
+h1 .w1 { color: var(--text); display: block; }
+h1 .w2 { color: var(--yellow); display: block; }
+h1 .w3 {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--mid);
+  max-width: 520px;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.hero-sub strong { color: var(--text); font-weight: 600; }
+
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+.btn-primary {
+  background: var(--yellow);
+  color: #000;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover { background: #ffc933; transform: translateY(-2px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border: 1px solid var(--border2);
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover { border-color: var(--mid); color: var(--text); }
+
+.hero-numbers {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-num {
+  display: flex;
+  flex-direction: column;
+}
+
+.num-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  color: var(--yellow);
+  line-height: 1;
+}
+
+.num-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== SECTION HEADER ===== */
+.sec-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.sec-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.sec-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cyan);
+  letter-spacing: 0.15em;
+}
+
+h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
+
+.sec-link {
+  font-size: 12px;
+  color: var(--yellow);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,180,0,0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+
+.sec-link:hover { border-color: var(--yellow); }
+
+/* ===== CATEGORIES ===== */
+.categories-section {
+  padding: 80px 0 60px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.cat-card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.cat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--cat-color, var(--yellow));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.cat-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+.cat-card:hover::after { transform: scaleX(1); }
+
+.cat-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+.cat-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.cat-count { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+/* ===== TOOLS GRID ===== */
+.tools-section {
+  padding: 70px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.tools-filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Outfit', sans-serif;
+}
+
+.filter-btn:hover { color: var(--text); border-color: var(--border2); }
+.filter-btn.active { background: var(--yellow); color: #000; border-color: var(--yellow); font-weight: 700; }
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.tool-card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px;
+  transition: all 0.25s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tool-color, var(--yellow)), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tool-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.tool-card:hover::before { opacity: 1; }
+
+.tool-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+.tool-logo {
+  width: 44px; height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: var(--s2);
+  flex-shrink: 0;
+}
+
+.tool-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.badge-free { background: rgba(0,230,118,0.12); color: var(--green); border: 1px solid rgba(0,230,118,0.25); }
+.badge-paid { background: rgba(255,62,108,0.12); color: var(--red); border: 1px solid rgba(255,62,108,0.25); }
+.badge-new { background: rgba(255,180,0,0.12); color: var(--yellow); border: 1px solid rgba(255,180,0,0.25); }
+.badge-popular { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+
+.tool-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.tool-category-tag {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.tool-desc {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.tool-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tool-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--yellow);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.tool-link {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ===== FEATURED ===== */
+.featured-section {
+  padding: 70px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.featured-card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 280px;
+}
+
+.featured-left {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--border);
+}
+
+.featured-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  background: rgba(255,180,0,0.12);
+  color: var(--yellow);
+  border: 1px solid rgba(255,180,0,0.25);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.featured-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.featured-desc {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 24px;
+}
+
+.featured-right {
+  padding: 40px;
+  background: var(--s2);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+.featured-stat {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.featured-stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+.fs-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--yellow);
+  line-height: 1;
+}
+
+.fs-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* ===== LATEST ARTICLES ===== */
+.articles-section {
+  padding: 70px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.article-card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+.article-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+
+.article-cat {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.article-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.article-excerpt {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ===== NEWSLETTER ===== */
+.newsletter-section {
+  padding: 80px 0;
+}
+
+.newsletter-box {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), var(--yellow), var(--cyan));
+}
+
+.nl-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.nl-sub {
+  font-size: 15px;
+  color: var(--mid);
+  margin-bottom: 32px;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nl-form {
+  display: flex;
+  gap: 10px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.nl-input {
+  flex: 1;
+  background: var(--s2);
+  border: 1px solid var(--border2);
+  border-radius: 3px;
+  padding: 12px 16px;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.nl-input:focus { border-color: var(--yellow); }
+.nl-input::placeholder { color: var(--muted); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--s1);
+  border-top: 1px solid var(--border);
+  padding: 56px 28px 32px;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand {}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.footer-logo span { color: var(--yellow); }
+
+.footer-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 260px;
+}
+
+.footer-col h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 16px;
+}
+
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col ul a {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col ul a:hover { color: var(--text); }
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  nav { padding: 0 16px; }
+  .nav-links { display: none; }
+  .nav-search input { width: 120px; }
+  .hero { padding: 90px 16px 60px; }
+  h1 { font-size: 52px; }
+  .featured-card { grid-template-columns: 1fr; }
+  .featured-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .newsletter-box { padding: 36px 24px; }
+  .nl-form { flex-direction: column; }
+  .container { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="/" class="nav-logo">AI<span>Vitrin</span></a>
+  <ul class="nav-links">
+    <li><a href="#araclar" class="active">Araçlar</a></li>
+    <li><a href="#kategoriler">Kategoriler</a></li>
+    <li><a href="#rehberler">Rehberler</a></li>
+    <li><a href="#karsilastirma">Karşılaştırma</a></li>
+    <li><a href="#prompts">Promptlar</a></li>
+  </ul>
+  <div class="nav-search">
+    <span class="search-icon">🔍</span>
+    <input type="text" placeholder="AI aracı ara...">
+  </div>
+</nav>
+
+<!-- HERO -->
+<div style="position:relative; z-index:1;">
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-tag">
+    <div class="hero-tag-dot"></div>
+    <span class="hero-tag-text">Türkiye'nin AI Araçları Rehberi</span>
+  </div>
+
+  <h1>
+    <span class="w1">EN İYİ</span>
+    <span class="w2">YAPAY ZEKA</span>
+    <span class="w3">ARAÇLARI</span>
+  </h1>
+
+  <p class="hero-sub">
+    <strong>500+ AI aracını</strong> Türkçe inceleyin. Kategoriler, karşılaştırmalar, kullanım rehberleri ve güncel haberler — hepsi bir arada.
+  </p>
+
+  <div class="hero-cta">
+    <a href="#araclar" class="btn-primary">Araçları Keşfet</a>
+    <a href="#rehberler" class="btn-secondary">Rehberlere Bak</a>
+  </div>
+
+  <div class="hero-numbers">
+    <div class="hero-num">
+      <span class="num-val">500+</span>
+      <span class="num-label">AI Aracı</span>
+    </div>
+    <div class="hero-num">
+      <span class="num-val">20+</span>
+      <span class="num-label">Kategori</span>
+    </div>
+    <div class="hero-num">
+      <span class="num-val">100+</span>
+      <span class="num-label">Türkçe Rehber</span>
+    </div>
+    <div class="hero-num">
+      <span class="num-val">Ücretsiz</span>
+      <span class="num-label">Tamamen</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- KATEGORİLER -->
+<section class="categories-section" id="kategoriler">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-title-group">
+        <span class="sec-num">01 //</span>
+        <h2>KATEGORİLER</h2>
+      </div>
+      <a href="#" class="sec-link">Tümünü Gör →</a>
+    </div>
+    <div class="cat-grid">
+      <a href="#" class="cat-card reveal" style="--cat-color: #ff3e6c;">
+        <span class="cat-icon">✍️</span>
+        <div class="cat-name">İçerik Üretimi</div>
+        <div class="cat-count">87 araç</div>
+      </a>
+      <a href="#" class="cat-card reveal" style="--cat-color: #ffb400;">
+        <span class="cat-icon">🎨</span>
+        <div class="cat-name">Görsel & Tasarım</div>
+        <div class="cat-count">64 araç</div>
+      </a>
+      <a href="#" class="cat-card reveal" style="--cat-color: #00d4ff;">
+        <span class="cat-icon">🎬</span>
+        <div class="cat-name">Video Üretimi</div>
+        <div class="cat-count">41 araç</div>
+      </a>
+      <a href="#" class="cat-card reveal" style="--cat-color: #00e676;">
+        <span class="cat-icon">💻</span>
+        <div class="cat-name">Kod & Geliştirme</div>
+        <div class="cat-count">58 araç</div>
+      </a>
+      <a href="#" class="cat-card reveal" style="--cat-color: #7c3aed;">
+        <span class="cat-icon">🎵</span>
+        <div class="cat-name">Ses & Müzik</div>
+        <div class="cat-count">29 araç</div>
+      </a>
+      <a href="#" class="cat-card reveal" style="--cat-color: #ff3e6c;">
+        <span class="cat-icon">📊</span>
+        <div class="cat-name">Veri & Analiz</div>
+        <div class="cat-count">45 araç</div>
+      </a>
+      <a href="#" class="cat-card reveal" style="--cat-color: #ffb400;">
+        <span class="cat-icon">🤖</span>
+        <div class="cat-name">AI Asistanlar</div>
+        <div class="cat-count">33 araç</div>
+      </a>
+      <a href="#" class="cat-card reveal" style="--cat-color: #00d4ff;">
+        <span class="cat-icon">📧</span>
+        <div class="cat-name">Pazarlama</div>
+        <div class="cat-count">52 araç</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ARAÇLAR -->
+<section class="tools-section" id="araclar">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-title-group">
+        <span class="sec-num">02 //</span>
+        <h2>ÖNE ÇIKAN ARAÇLAR</h2>
+      </div>
+      <a href="#" class="sec-link">Tüm Araçlar →</a>
+    </div>
+
+    <div class="tools-filter reveal">
+      <button class="filter-btn active">Tümü</button>
+      <button class="filter-btn">Ücretsiz</button>
+      <button class="filter-btn">Yeni Çıkanlar</button>
+      <button class="filter-btn">En Popüler</button>
+      <button class="filter-btn">İçerik</button>
+      <button class="filter-btn">Görsel</button>
+      <button class="filter-btn">Video</button>
+      <button class="filter-btn">Kod</button>
+    </div>
+
+    <div class="tools-grid">
+
+      <a href="#" class="tool-card reveal" style="--tool-color: #ffb400;">
+        <div class="tool-card-head">
+          <div class="tool-logo">🤖</div>
+          <div class="tool-badges">
+            <span class="badge badge-free">Ücretsiz</span>
+            <span class="badge badge-popular">Popüler</span>
+          </div>
+        </div>
+        <div class="tool-category-tag">AI Asistan</div>
+        <div class="tool-name">ChatGPT</div>
+        <div class="tool-desc">OpenAI'nın güçlü dil modeli. Yazı yazma, kod, analiz ve çok daha fazlası için kullanılabilir.</div>
+        <div class="tool-card-footer">
+          <div class="tool-rating">★ 4.8 <span style="color:var(--muted);font-size:10px;">(2.4K yorum)</span></div>
+          <span class="tool-link">İncele →</span>
+        </div>
+      </a>
+
+      <a href="#" class="tool-card reveal" style="--tool-color: #ff3e6c;">
+        <div class="tool-card-head">
+          <div class="tool-logo">🎨</div>
+          <div class="tool-badges">
+            <span class="badge badge-paid">Ücretli</span>
+            <span class="badge badge-new">Yeni</span>
+          </div>
+        </div>
+        <div class="tool-category-tag">Görsel Üretimi</div>
+        <div class="tool-name">Midjourney</div>
+        <div class="tool-desc">Discord üzerinden çalışan, sanatsal ve gerçekçi görseller üreten popüler AI aracı.</div>
+        <div class="tool-card-footer">
+          <div class="tool-rating">★ 4.7 <span style="color:var(--muted);font-size:10px;">(1.8K yorum)</span></div>
+          <span class="tool-link">İncele →</span>
+        </div>
+      </a>
+
+      <a href="#" class="tool-card reveal" style="--tool-color: #00d4ff;">
+        <div class="tool-card-head">
+          <div class="tool-logo">✍️</div>
+          <div class="tool-badges">
+            <span class="badge badge-free">Ücretsiz</span>
+          </div>
+        </div>
+        <div class="tool-category-tag">İçerik Üretimi</div>
+        <div class="tool-name">Claude</div>
+        <div class="tool-desc">Anthropic'in geliştirdiği güvenli ve güçlü AI asistan. Uzun form içerik ve analiz için ideal.</div>
+        <div class="tool-card-footer">
+          <div class="tool-rating">★ 4.9 <span style="color:var(--muted);font-size:10px;">(1.2K yorum)</span></div>
+          <span class="tool-link">İncele →</span>
+        </div>
+      </a>
+
+      <a href="#" class="tool-card reveal" style="--tool-color: #00e676;">
+        <div class="tool-card-head">
+          <div class="tool-logo">💻</div>
+          <div class="tool-badges">
+            <span class="badge badge-free">Ücretsiz</span>
+            <span class="badge badge-popular">Popüler</span>
+          </div>
+        </div>
+        <div class="tool-category-tag">Kod & Geliştirme</div>
+        <div class="tool-name">GitHub Copilot</div>
+        <div class="tool-desc">Gerçek zamanlı kod önerileri sunan AI asistan. Her büyüklükteki yazılım projesi için.</div>
+        <div class="tool-card-footer">
+          <div class="tool-rating">★ 4.6 <span style="color:var(--muted);font-size:10px;">(980 yorum)</span></div>
+          <span class="tool-link">İncele →</span>
+        </div>
+      </a>
+
+      <a href="#" class="tool-card reveal" style="--tool-color: #7c3aed;">
+        <div class="tool-card-head">
+          <div class="tool-logo">🎬</div>
+          <div class="tool-badges">
+            <span class="badge badge-new">Yeni</span>
+            <span class="badge badge-paid">Ücretli</span>
+          </div>
+        </div>
+        <div class="tool-category-tag">Video Üretimi</div>
+        <div class="tool-name">Sora</div>
+        <div class="tool-desc">OpenAI'nın metin-video AI modeli. Sadece açıklama yazarak gerçekçi videolar üretin.</div>
+        <div class="tool-card-footer">
+          <div class="tool-rating">★ 4.5 <span style="color:var(--muted);font-size:10px;">(640 yorum)</span></div>
+          <span class="tool-link">İncele →</span>
+        </div>
+      </a>
+
+      <a href="#" class="tool-card reveal" style="--tool-color: #ffb400;">
+        <div class="tool-card-head">
+          <div class="tool-logo">📊</div>
+          <div class="tool-badges">
+            <span class="badge badge-free">Ücretsiz</span>
+          </div>
+        </div>
+        <div class="tool-category-tag">Veri & Analiz</div>
+        <div class="tool-name">Perplexity AI</div>
+        <div class="tool-desc">Gerçek zamanlı web araması yapan AI. Araştırma ve bilgi toplama için güçlü bir araç.</div>
+        <div class="tool-card-footer">
+          <div class="tool-rating">★ 4.7 <span style="color:var(--muted);font-size:10px;">(1.1K yorum)</span></div>
+          <span class="tool-link">İncele →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured-section">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-title-group">
+        <span class="sec-num">03 //</span>
+        <h2>HAFTANIN ARACI</h2>
+      </div>
+    </div>
+    <div class="featured-card reveal">
+      <div class="featured-left">
+        <div>
+          <div class="featured-tag">⚡ Editör Seçimi</div>
+          <div class="featured-title">CLAUDE 4<br>OPUS</div>
+          <p class="featured-desc">Anthropic'in en güçlü modeli. Uzun form içerik, kod analizi ve karmaşık görevler için şu an piyasadaki en iyi seçeneklerden biri. Türkçe desteği mükemmel.</p>
+        </div>
+        <a href="#" class="btn-primary" style="width:fit-content;">Detaylı İncele →</a>
+      </div>
+      <div class="featured-right">
+        <div class="featured-stat">
+          <span class="fs-val">4.9/5</span>
+          <span class="fs-label">Editör Puanı</span>
+        </div>
+        <div class="featured-stat">
+          <span class="fs-val">Ücretsiz</span>
+          <span class="fs-label">Başlangıç Planı</span>
+        </div>
+        <div class="featured-stat">
+          <span class="fs-val">Türkçe</span>
+          <span class="fs-label">Dil Desteği</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REHBERLER -->
+<section class="articles-section" id="rehberler">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-title-group">
+        <span class="sec-num">04 //</span>
+        <h2>SON REHBERLER</h2>
+      </div>
+      <a href="#" class="sec-link">Tüm Rehberler →</a>
+    </div>
+    <div class="articles-grid">
+
+      <a href="#" class="article-card reveal">
+        <div class="article-cat">İçerik Üretimi</div>
+        <div class="article-title">2026'nın En İyi 20 Ücretsiz AI Yazı Aracı</div>
+        <div class="article-excerpt">Blog yazısından sosyal medya içeriğine, tamamen ücretsiz kullanabileceğiniz en iyi AI yazı araçlarını derledik.</div>
+        <div class="article-meta">
+          <span>5 dk okuma</span>
+          <span>2 gün önce</span>
+        </div>
+      </a>
+
+      <a href="#" class="article-card reveal">
+        <div class="article-cat">Karşılaştırma</div>
+        <div class="article-title">ChatGPT vs Claude vs Gemini — Hangisi Daha İyi?</div>
+        <div class="article-excerpt">Üç büyük AI asistanı 10 farklı kategoride test ettik. Türkçe, kod, yaratıcılık ve daha fazlası.</div>
+        <div class="article-meta">
+          <span>8 dk okuma</span>
+          <span>4 gün önce</span>
+        </div>
+      </a>
+
+      <a href="#" class="article-card reveal">
+        <div class="article-cat">Rehber</div>
+        <div class="article-title">Midjourney ile Profesyonel Görsel Üretme — Başlangıç Rehberi</div>
+        <div class="article-excerpt">Sıfırdan başlayanlar için adım adım Midjourney rehberi. Prompt yazma teknikleri ve örnekler.</div>
+        <div class="article-meta">
+          <span>6 dk okuma</span>
+          <span>1 hafta önce</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-box reveal">
+      <div class="nl-title">HAFTALIK AI BÜLTENİ</div>
+      <p class="nl-sub">Her hafta en iyi yeni AI araçları, rehberler ve haberler — doğrudan emailine.</p>
+      <div class="nl-form">
+        <input type="email" class="nl-input" placeholder="email@adresin.com">
+        <button class="btn-primary">Abone Ol</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">AI<span>Vitrin</span></div>
+      <p class="footer-desc">Türkiye'nin en kapsamlı yapay zeka araçları rehberi. 500+ araç, Türkçe incelemeler.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Keşfet</h4>
+      <ul>
+        <li><a href="#">Tüm Araçlar</a></li>
+        <li><a href="#">Kategoriler</a></li>
+        <li><a href="#">Karşılaştırmalar</a></li>
+        <li><a href="#">Yeni Çıkanlar</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Rehberler</h4>
+      <ul>
+        <li><a href="#">Başlangıç Rehberi</a></li>
+        <li><a href="#">Prompt Kütüphanesi</a></li>
+        <li><a href="#">AI Haberleri</a></li>
+        <li><a href="#">Sık Sorulanlar</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Site</h4>
+      <ul>
+        <li><a href="#">Hakkında</a></li>
+        <li><a href="#">İletişim</a></li>
+        <li><a href="#">Araç Öner</a></li>
+        <li><a href="#">Reklam</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom" style="max-width:1100px;margin:0 auto;padding:24px 0 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:var(--muted);">
+    <span>© 2026 AIVitrin — Tüm hakları saklıdır.</span>
+    <span>Türkiye'nin AI Rehberi</span>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Nav active on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 20) {
+    nav.style.borderBottomColor = 'rgba(255,180,0,0.15)';
+  } else {
+    nav.style.borderBottomColor = 'var(--border)';
+  }
+});
+</script>
+
+</body>
+</html>
